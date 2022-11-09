@@ -21,7 +21,7 @@ class HFAccelerateModel(Model):
 
         kwargs = {
             "pretrained_model_name_or_path": downloaded_model_path,
-            "device_map": "balanced_low_0",
+            "device_map": "auto" if "7b" in args.model_name else "balanced_low_0",
         }
         if args.dtype == torch.int8:
             # using LLM.int8()
