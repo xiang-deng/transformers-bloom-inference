@@ -10,7 +10,7 @@
 ifconfig
 # change 
 SIF_IMAGE={PATH_TO_BUILD_IMAGE}
-singularity exec $SIF_IMAGE --nv  bash -c "\
+singularity exec --nv $SIF_IMAGE bash -c "\
 export PYTHONNOUSERSITE=1;
 export HOME=/tmp/$USER;
 cd {Clone_Repo_DIR};
