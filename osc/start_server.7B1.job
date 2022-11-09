@@ -7,10 +7,11 @@
 #SBATCH --account=PAA0201
 
 ifconfig
-singularity exec --nv /users/PAS1197/osu8727/workspace/transformers-bloom-inference/osc/bloom.sif bash -c "\
+SIF_IMAGE={PATH_TO_BUILD_IMAGE}
+singularity exec $SIF_IMAGE --nv  bash -c "\
 export PYTHONNOUSERSITE=1;
 export HOME=/tmp/$USER;
-cd /users/PAS1197/osu8727/workspace/transformers-bloom-inference;
+cd {Clone_Repo_DIR};
 export TRANSFORMERS_CACHE=/fs/scratch/PAA0201/LLM_models/cache;
 export MII_CACHE_PATH=/tmp/$USER/mii_cache;
 export TOKENIZERS_PARALLELISM=false;
