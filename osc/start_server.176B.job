@@ -3,17 +3,17 @@
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=44
-#SBATCH --output=bloom
+#SBATCH --output=bloom_176B
 #SBATCH --account=PAA0201
 
 # print the server address
 ifconfig
 # change 
-SIF_IMAGE={PATH_TO_BUILD_IMAGE}
-singularity exec $SIF_IMAGE --nv  bash -c "\
+SIF_IMAGE=/fs/project/PAA0201/LLM_models/transformers-bloom-inference-new/osc/bloom.sif
+singularity exec --nv $SIF_IMAGE bash -c "\
 export PYTHONNOUSERSITE=1;
 export HOME=/tmp/$USER;
-cd {Clone_Repo_DIR};
+cd /fs/project/PAA0201/LLM_models/transformers-bloom-inference-new;
 export TRANSFORMERS_CACHE=/fs/scratch/PAA0201/LLM_models/cache;
 export MII_CACHE_PATH=/tmp/$USER/mii_cache;
 export TOKENIZERS_PARALLELISM=false;
@@ -21,7 +21,7 @@ export MODEL_NAME=microsoft/bloom-deepspeed-inference-int8;
 export DEPLOYMENT_FRAMEWORK=ds_inference;
 export DTYPE=int8;
 export MAX_INPUT_LENGTH=2048;
-export MAX_BATCH_SIZE=4;
+export MAX_BATCH_SIZE=128;
 export NUM_GPUS=4;
 bash start_server.sh
 "
