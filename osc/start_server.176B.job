@@ -9,7 +9,11 @@
 # print the server address
 ifconfig
 # change 
+<<<<<<< HEAD
 SIF_IMAGE=/fs/project/PAA0201/LLM_models/transformers-bloom-inference-new/osc/bloom.sif
+=======
+SIF_IMAGE={PATH_TO_BUILD_IMAGE}
+>>>>>>> e1e7ff3c3fb2119d6ced262421d5647e94b84239
 singularity exec --nv $SIF_IMAGE bash -c "\
 export PYTHONNOUSERSITE=1;
 export HOME=/tmp/$USER;
